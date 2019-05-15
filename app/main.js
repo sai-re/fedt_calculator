@@ -8,6 +8,7 @@ const FedtCalculator = {
         operandPad: document.getElementById("operand-pad-js"),
         answer: document.getElementById("answer-js"),
         equals: document.getElementById("submit-js"),
+        reset: document.getElementById("ac-js")
     },
 
     init: function() {
@@ -24,18 +25,27 @@ const FedtCalculator = {
         const subtract = (num1, num2) => Number(num1) - Number(num2);
         const divide = (num1, num2) => Number(num1) / Number(num2);
         const add = (num1, num2) => Number(num1) + (num2);
+
+        const reset = () => {
+            x.num1.textContent = "";
+            x.num2.textContent = "";
+            x.operand.textContent = "";
+            x.answer.textContent = "0";
+            isDisabled = false;
+            isSecondOperand = false;
+        }
         
         x.numberPad.addEventListener('click', e => {
             if (isSecondOperand === true) {
-                x.num2.innerHTML += e.target.textContent;
+                x.num2.textContent += e.target.textContent;
             } else {
-                x.num1.innerHTML += e.target.textContent;
+                x.num1.textContent += e.target.textContent;
             }
         });
         
         x.operandPad.addEventListener('click', function handleOperand(e) {
             isSecondOperand = true;
-            x.operand.innerHTML += e.target.textContent;
+            x.operand.textContent += e.target.textContent;
 
             if (isDisabled === true) {
                 x.operandPad.removeEventListener('click', handleOperand);
@@ -43,7 +53,8 @@ const FedtCalculator = {
         });
 
         x.equals.addEventListener('click', e => {
-            isDisabled = false;
+            isDisabled = true;
+            isSecondOperand = false;
             
             if (x.operand.textContent === 'x') {
                 answer = multiply(x.num1.textContent, x.num2.textContent);         
@@ -61,12 +72,16 @@ const FedtCalculator = {
                 answer = divide(x.num1.textContent, x.num2.textContent);         
             }
 
-            x.answer.innerHTML = answer;
-            x.num1.innerHTML = answer
+            x.answer.textContent = answer;
+            x.num1.textContent = answer;
 
-            x.num2.innerHTML = "";
-            x.operand.innerHTML = "";
-        })
+            x.num2.textContent = "";
+            x.operand.textContent = "";
+        });
+
+        x.reset.addEventListener('click', e => {
+            reset();
+        });
     }
 }
 
