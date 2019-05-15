@@ -35,8 +35,8 @@ const FedtCalculator = {
             isDisabled = false;
             isSecondOperand = false;
         }
-        
-        x.numberPad.addEventListener('click', e => {
+
+        const handleNumberpad = e => {
             if (hasAnswer) {
                 x.num1.textContent = "";
                 hasAnswer = false;
@@ -47,15 +47,15 @@ const FedtCalculator = {
             } else {
                 x.num1.textContent += e.target.textContent;
             }
-        });
-        
-        x.operandPad.addEventListener('click', function handleOperand(e) {
+        }
+
+        const handleOperand = e => {
             isSecondOperand = true;
             hasAnswer = false;
             x.operand.textContent = e.target.textContent;
-        });
+        }
 
-        x.equals.addEventListener('click', e => {
+        const handleEquals = () => {
             hasAnswer = true;
             isSecondOperand = false;
             
@@ -66,21 +66,27 @@ const FedtCalculator = {
             if (x.operand.textContent === '+') {
                 answer = add(x.num1.textContent, x.num2.textContent);         
             }
-
+    
             if (x.operand.textContent === '-') {
                 answer = subtract(x.num1.textContent, x.num2.textContent);         
             }
-
+    
             if (x.operand.textContent === '/') {
                 answer = divide(x.num1.textContent, x.num2.textContent);         
             }
-
+    
             x.answer.textContent = answer.toLocaleString();
             x.num1.textContent = answer;
-
+    
             x.num2.textContent = "";
             x.operand.textContent = "";
-        });
+        }
+        
+        x.numberPad.addEventListener('click', handleNumberpad);
+        
+        x.operandPad.addEventListener('click', handleOperand);
+
+        x.equals.addEventListener('click', handleEquals);
 
         x.reset.addEventListener('click', () => {
             reset();
