@@ -1,0 +1,23 @@
+html,
+body,
+main {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.calculator {
+    width: 261px;
+    height: 505px;
+    background-color: #29363b;
+}

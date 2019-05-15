@@ -15,11 +15,11 @@ gulp.task('html', function() {
 });
 
 gulp.task('watchCSS',function() {
-    gulp.watch('./app/*.scss', gulp.series('styles'));
+    gulp.watch('./app/*.scss', ['styles']);
 });
 
 gulp.task('watchHTML',function() {
-    gulp.watch('./app/*.html', gulp.series('html'));
+    gulp.watch('./app/*.html', ['html']);
 });
 
-gulp.task('default', gulp.series(gulp.parallel('watchCSS', 'watchHTML')));
+gulp.task('default', ['watchCSS', 'watchHTML']);
