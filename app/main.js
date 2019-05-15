@@ -19,7 +19,6 @@ const FedtCalculator = {
 
     calculator: function() {
         let isSecondOperand = false;
-        let isBtnDisabled = false;
         let hasAnswer = false;
         let answer = 0;
 
@@ -32,7 +31,7 @@ const FedtCalculator = {
             x.num1.textContent = "";
             x.num2.textContent = "";
             x.operand.textContent = "";
-            x.answer.textContent = "0";
+            x.answer.textContent = "";
             isDisabled = false;
             isSecondOperand = false;
         }
@@ -53,16 +52,10 @@ const FedtCalculator = {
         x.operandPad.addEventListener('click', function handleOperand(e) {
             isSecondOperand = true;
             hasAnswer = false;
-            x.operand.textContent += e.target.textContent;
-
-            if (isBtnDisabled) {
-                // x.operandPad.removeEventListener('click', handleOperand);
-                // e.target.disabled = true;
-            }
+            x.operand.textContent = e.target.textContent;
         });
 
         x.equals.addEventListener('click', e => {
-            isBtnDisabled = true;
             hasAnswer = true;
             isSecondOperand = false;
             
@@ -92,11 +85,6 @@ const FedtCalculator = {
         x.reset.addEventListener('click', () => {
             reset();
         });
-
-        
-        for (let item of x.allOperand) {
-            console.log(item);
-        }
     }
 }
 

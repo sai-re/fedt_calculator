@@ -71,6 +71,10 @@ button {
         height: 66px;
     }
     
+    .pad__reset-buttons:active {
+        background-color: #d43f52;
+    }
+    
     .pad__numbers {
         flex-wrap: wrap;
     }
@@ -79,6 +83,10 @@ button {
         width: 33.3%;
         background-color: #f6827a;
         height: 66px;
+    }
+
+    .pad__number:active {
+        background-color: #d4716a;
     }
     
     .pad__number-zero {
@@ -96,5 +104,10 @@ button {
         width: 100%;
         height: 66px;
         background-color: #f7ba86;
+    }
+    
+    .pad__operand:active,
+    .pad__equal:active {
+        background-color: #e5ab79;
     }
 }
