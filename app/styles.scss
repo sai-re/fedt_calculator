@@ -14,6 +14,13 @@ body {
     box-sizing: border-box;
 }
 
+button {
+    border: 0;
+    border-bottom: 1px solid #88888863;
+    font-size: 1.5rem;
+    color: #f6f6f6;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -22,8 +29,9 @@ body {
 }
 
 .calculator {
+    display: flex;
+    flex-direction: column;
     width: 261px;
-    height: 505px;
     background-color: #29363b;
 }
 
@@ -44,4 +52,55 @@ body {
 .calculator__answer {
     color: #f6f6f6;
     font-size: 3rem;
+}
+
+.calculator__pad-holder {
+    display: flex;
+    flex-grow: 1;
+}
+
+.calculator__pad {
+    background-color: #f6827a;
+    width: 100%;
+}
+
+.calculator__reset-buttons,
+.calculator__number {
+    float: left;
+    height: 66px;
+}
+
+.calculator__reset-buttons {
+    background-color: #ec475c;
+    text-transform: uppercase;
+}
+
+.calculator__reset-ac {
+    width: 33.3%;
+}
+
+.calculator__number {
+    width: 33.3%;
+    background-color: #f6827a;
+}
+
+.calculator__reset-save,
+.calculator__number-zero {
+    width: 66.7%;
+}
+
+.calculator__number-zero {
+    text-align: left;
+    padding-left: 25px;
+}
+
+.calculator__operations {
+    width: 40%;
+}
+
+.calculator__operation {
+    width: 100%;
+    height: 66px;
+    float: left;
+    background-color: #f7ba86;
 }
