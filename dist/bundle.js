@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("\n\n//# sourceURL=webpack:///./app/main.js?");
+eval("var x;\nvar FedtCalculator = {\n  variables: {\n    numberPad: document.getElementById(\"number-pad-js\")\n  },\n  init: function init() {\n    x = this.variables;\n    this.calculator();\n  },\n  calculator: function calculator() {}\n};\ndocument.addEventListener(\"DOMContentLoaded\", function (e) {\n  FedtCalculator.init();\n}());\n\n//# sourceURL=webpack:///./app/main.js?");
 
 /***/ }),
 
