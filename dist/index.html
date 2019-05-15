@@ -14,11 +14,11 @@
             <div class="flex calculator">
                 <section class="flex display">
                     <div class="calculation">
-                        <div class="calculation__text" id="num1-js">24</div>
-                        <div class="calculation__text" id="operand-js">x</div>
-                        <div class="calculation__text" id="num2-js">4545</div>
+                        <div class="calculation__text" id="num1-js"></div>
+                        <div class="calculation__text" id="operand-js"></div>
+                        <div class="calculation__text" id="num2-js"></div>
                     </div>
-                    <div class="answer" id="answer-js">1,460</div>
+                    <div class="answer" id="answer-js"></div>
                 </section>
 
                 <div class="flex pad-holder">
@@ -44,11 +44,13 @@
                     </section>
 
                     <section class="pad__operations">
-                        <button class="pad__operand">/</button>
-                        <button class="pad__operand">x</button>
-                        <button class="pad__operand">-</button>
-                        <button class="pad__operand">+</button>
-                        <button class="pad__operand">=</button>
+                        <div class="pad__operations-holder" id="operand-pad-js">
+                            <button class="pad__operand">/</button>
+                            <button class="pad__operand">x</button>
+                            <button class="pad__operand">-</button>
+                            <button class="pad__operand">+</button>
+                        </div>
+                        <button class="pad__operand" id="submit-js">=</button>
                     </section>
                 </div>
 
