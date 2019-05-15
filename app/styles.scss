@@ -19,88 +19,81 @@ button {
     border-bottom: 1px solid #88888863;
     font-size: 1.5rem;
     color: #f6f6f6;
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
 }
 
 .container {
-    display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 
 .calculator {
-    display: flex;
     flex-direction: column;
     width: 261px;
     background-color: #29363b;
-}
-
-.calculator__display {
-    display: flex;
-    padding: 30px;
-    min-height: 180px;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.calculator__calculation {
-    color: #7b8386;
-    font-size: 1.5rem;
-}
-
-.calculator__answer {
-    color: #f6f6f6;
-    font-size: 3rem;
-}
-
-.calculator__pad-holder {
-    display: flex;
-    flex-grow: 1;
-}
-
-.calculator__pad {
-    background-color: #f6827a;
-    width: 100%;
-}
-
-.calculator__reset-buttons,
-.calculator__number {
-    float: left;
-    height: 66px;
-}
-
-.calculator__reset-buttons {
-    background-color: #ec475c;
-    text-transform: uppercase;
-}
-
-.calculator__reset-ac {
-    width: 33.3%;
-}
-
-.calculator__number {
-    width: 33.3%;
-    background-color: #f6827a;
-}
-
-.calculator__reset-save,
-.calculator__number-zero {
-    width: 66.7%;
-}
-
-.calculator__number-zero {
-    text-align: left;
-    padding-left: 25px;
-}
-
-.calculator__operations {
-    width: 40%;
-}
-
-.calculator__operation {
-    width: 100%;
-    height: 66px;
-    float: left;
-    background-color: #f7ba86;
+    
+    .display {
+        padding: 30px;
+        min-height: 180px;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    
+    .calculation {
+        color: #7b8386;
+        font-size: 1.5rem;
+        display: flex;
+    }
+    
+    .calculation__text {
+        padding: 0 5px;
+    }
+    
+    .answer {
+        color: #f6f6f6;
+        font-size: 3rem;
+    }
+    
+    .pad {
+        background-color: #f6827a;
+    }
+    
+    .pad__reset-buttons {
+        background-color: #ec475c;
+        text-transform: uppercase;
+        flex-grow: 1;
+        height: 66px;
+    }
+    
+    .pad__numbers {
+        flex-wrap: wrap;
+    }
+    
+    .pad__number {
+        width: 33.3%;
+        background-color: #f6827a;
+        height: 66px;
+    }
+    
+    .pad__number-zero {
+        width: 66.7%;
+        text-align: left;
+        padding-left: 24px;
+    }
+    
+    .pad__operations {
+        flex-wrap: wrap;
+    }
+    
+    .pad__operand {
+        width: 100%;
+        height: 66px;
+        background-color: #f7ba86;
+    }
 }

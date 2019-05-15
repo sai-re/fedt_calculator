@@ -7,43 +7,48 @@
     <title>FEDT Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <main>
-        <section class="container">
-            <div class="calculator">
-                <section class="calculator__display">
-                    <div class="calculator__calculation">365 x 4 =</div>
-                    <div class="calculator__answer">1,460</div>
+        <section class="flex container">
+            <div class="flex calculator">
+                <section class="flex display">
+                    <div class="calculation">
+                        <div class="calculation__text" id="num1-js">24</div>
+                        <div class="calculation__text" id="operand-js">x</div>
+                        <div class="calculation__text" id="num2-js">4545</div>
+                    </div>
+                    <div class="answer" id="answer-js">1,460</div>
                 </section>
 
-                <div class="calculator__pad-holder">
-                    <section class="calculator__pad">
-                        <div class="calculator__reset-holder">
-                            <button class="calculator__reset-buttons calculator__reset-ac">ac</button>
-                            <button class="calculator__reset-buttons calculator__reset-save">Save</button>
+                <div class="flex pad-holder">
+                    <section class="pad">
+                        <div class="flex pad__reset-holder">
+                            <button class="pad__reset-buttons pad__reset-ac" id="ac-js">ac</button>
+                            <button class="pad__reset-buttons pad__reset-save" id="save-js">Save</button>
                         </div>
 
-                        <div class="calculator__numbers">
-                            <button class="calculator__number">.</button>
-                            <button class="calculator__number calculator__number-zero">0</button>
-                            <button class="calculator__number">1</button>
-                            <button class="calculator__number">2</button>
-                            <button class="calculator__number">3</button>
-                            <button class="calculator__number">4</button>
-                            <button class="calculator__number">5</button>
-                            <button class="calculator__number">6</button>
-                            <button class="calculator__number">7</button>
-                            <button class="calculator__number">8</button>
-                            <button class="calculator__number">9</button>
+                        <div class="flex pad__numbers">
+                            <button class="pad__number">.</button>
+                            <button class="pad__number pad__number-zero">0</button>
+                            <button class="pad__number">1</button>
+                            <button class="pad__number">2</button>
+                            <button class="pad__number">3</button>
+                            <button class="pad__number">4</button>
+                            <button class="pad__number">5</button>
+                            <button class="pad__number">6</button>
+                            <button class="pad__number">7</button>
+                            <button class="pad__number">8</button>
+                            <button class="pad__number">9</button>
                         </div>
                     </section>
 
-                    <section class="calculator__operations">
-                        <button class="calculator__operation">/</button>
-                        <button class="calculator__operation">x</button>
-                        <button class="calculator__operation">-</button>
-                        <button class="calculator__operation">+</button>
-                        <button class="calculator__operation">=</button>
+                    <section class="pad__operations">
+                        <button class="pad__operand">/</button>
+                        <button class="pad__operand">x</button>
+                        <button class="pad__operand">-</button>
+                        <button class="pad__operand">+</button>
+                        <button class="pad__operand">=</button>
                     </section>
                 </div>
 
