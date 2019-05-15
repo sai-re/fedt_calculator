@@ -8,7 +8,8 @@ const FedtCalculator = {
         operandPad: document.getElementById("operand-pad-js"),
         answer: document.getElementById("answer-js"),
         equals: document.getElementById("submit-js"),
-        reset: document.getElementById("ac-js")
+        reset: document.getElementById("ac-js"),
+        allOperand: document.querySelectorAll('.pad__operand')
     },
 
     init: function() {
@@ -18,13 +19,14 @@ const FedtCalculator = {
 
     calculator: function() {
         let isSecondOperand = false;
-        let isDisabled = false;
+        let isBtnDisabled = false;
+        let hasAnswer = false;
         let answer = 0;
 
         const multiply = (num1, num2) => Number(num1) * Number(num2);
         const subtract = (num1, num2) => Number(num1) - Number(num2);
         const divide = (num1, num2) => Number(num1) / Number(num2);
-        const add = (num1, num2) => Number(num1) + (num2);
+        const add = (num1, num2) => Number(num1) + Number(num2);
 
         const reset = () => {
             x.num1.textContent = "";
@@ -36,7 +38,12 @@ const FedtCalculator = {
         }
         
         x.numberPad.addEventListener('click', e => {
-            if (isSecondOperand === true) {
+            if (hasAnswer) {
+                x.num1.textContent = "";
+                hasAnswer = false;
+            } 
+            
+            if (isSecondOperand) {
                 x.num2.textContent += e.target.textContent;
             } else {
                 x.num1.textContent += e.target.textContent;
@@ -45,15 +52,18 @@ const FedtCalculator = {
         
         x.operandPad.addEventListener('click', function handleOperand(e) {
             isSecondOperand = true;
+            hasAnswer = false;
             x.operand.textContent += e.target.textContent;
 
-            if (isDisabled === true) {
-                x.operandPad.removeEventListener('click', handleOperand);
+            if (isBtnDisabled) {
+                // x.operandPad.removeEventListener('click', handleOperand);
+                // e.target.disabled = true;
             }
         });
 
         x.equals.addEventListener('click', e => {
-            isDisabled = true;
+            isBtnDisabled = true;
+            hasAnswer = true;
             isSecondOperand = false;
             
             if (x.operand.textContent === 'x') {
@@ -72,16 +82,21 @@ const FedtCalculator = {
                 answer = divide(x.num1.textContent, x.num2.textContent);         
             }
 
-            x.answer.textContent = answer;
+            x.answer.textContent = answer.toLocaleString();
             x.num1.textContent = answer;
 
             x.num2.textContent = "";
             x.operand.textContent = "";
         });
 
-        x.reset.addEventListener('click', e => {
+        x.reset.addEventListener('click', () => {
             reset();
         });
+
+        
+        for (let item of x.allOperand) {
+            console.log(item);
+        }
     }
 }
 
