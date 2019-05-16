@@ -9,6 +9,7 @@ const FedtCalculator = {
         answer: document.getElementById("answer-js"),
         equals: document.getElementById("submit-js"),
         reset: document.getElementById("ac-js"),
+        save: document.getElementById("save-js"),
         decimal: document.getElementById("decimal-js"),
         zero: document.getElementById("zero-js"),
         allOperand: document.querySelectorAll('.pad__operand')
@@ -17,6 +18,7 @@ const FedtCalculator = {
     init: function() {
         x = this.variables;
         this.calculator();
+        this.toCSV();
     },
 
     calculator: function() {
@@ -74,6 +76,7 @@ const FedtCalculator = {
         const handleEquals = () => {
             hasAnswer = true;
             isSecondOperand = false;
+            x.decimal.disabled = false;
             
             // if statements to determine which calculation to use
             if (x.operand.textContent === 'x') {
@@ -112,6 +115,18 @@ const FedtCalculator = {
         x.reset.addEventListener('click', () => {
             reset();
         });
+    },
+
+    toCSV: function() {
+        const getIP = fetch('https://api.ipify.org?format=json').then(response => response.json());
+        const getDate = new Date();
+        const date = `${getDate.getDate()}, ${getDate.getMonth()}, ${getDate.getFullYear()}`;
+
+        console.log(date);
+
+        Promise.all([getIP]).then(data => {
+            console.log(data[0].ip);
+        })
     }
 }
 
