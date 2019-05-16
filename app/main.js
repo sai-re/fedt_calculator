@@ -9,6 +9,8 @@ const FedtCalculator = {
         answer: document.getElementById("answer-js"),
         equals: document.getElementById("submit-js"),
         reset: document.getElementById("ac-js"),
+        decimal: document.getElementById("decimal-js"),
+        zero: document.getElementById("zero-js"),
         allOperand: document.querySelectorAll('.pad__operand')
     },
 
@@ -21,6 +23,7 @@ const FedtCalculator = {
         //booleons to check status
         let isSecondOperand = false;
         let hasAnswer = false;
+        let click = 0;
         let answer = 0;
 
         //calculation functions
@@ -37,16 +40,20 @@ const FedtCalculator = {
             x.answer.textContent = "";
             isDisabled = false;
             isSecondOperand = false;
+            click = 0;
         }
 
         const handleNumberpad = e => {
+            click++;
+            console.log(click);
+
             //if answer is already on display and btn on number pad is pressed, begin new calculation 
             if (hasAnswer) {
                 x.num1.textContent = "";
                 hasAnswer = false;
-            } 
+            }
             
-            //if an operand has been clicked, enter number as 2nd number else 1st
+            // if an operand has been clicked, enter number as 2nd number else 1st
             if (isSecondOperand) {
                 x.num2.textContent += e.target.textContent;
             } else {
@@ -54,12 +61,14 @@ const FedtCalculator = {
             }
         }
 
-        const handleOperand = e => {
-            //toggles operand bool to indicate 1st number cannot be altered 
-            isSecondOperand = true;
-            //resets answer to allow for new calculation
-            hasAnswer = false;
-            x.operand.textContent = e.target.textContent;
+        const handleOperand = e => {            
+            if (click > 0) {
+                //toggles operand bool to indicate 1st number cannot be altered 
+                isSecondOperand = true;
+                //resets answer to allow for new calculation
+                hasAnswer = false;
+                x.operand.textContent = e.target.textContent;
+            }
         }
 
         const handleEquals = () => {
