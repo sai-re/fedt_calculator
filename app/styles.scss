@@ -59,6 +59,11 @@ button {
         color: #f6f6f6;
         font-size: 3rem;
     }
+
+    .calculation__text,
+    .answer {
+        word-break: break-all;
+    }
     
     .pad {
         background-color: #f6827a;

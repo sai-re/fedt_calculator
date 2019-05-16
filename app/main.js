@@ -11,8 +11,6 @@ const FedtCalculator = {
         reset: document.getElementById("ac-js"),
         save: document.getElementById("save-js"),
         decimal: document.getElementById("decimal-js"),
-        zero: document.getElementById("zero-js"),
-        allOperand: document.querySelectorAll('.pad__operand')
     },
 
     init: function() {
@@ -25,7 +23,6 @@ const FedtCalculator = {
         //booleons to check status
         let isSecondOperand = false;
         let hasAnswer = false;
-        let click = 0;
         let answer = 0;
 
         //calculation functions
@@ -42,13 +39,10 @@ const FedtCalculator = {
             x.answer.textContent = "";
             isDisabled = false;
             isSecondOperand = false;
-            click = 0;
+            x.decimal.disabled = false;
         }
 
         const handleNumberpad = e => {
-            click++;
-            console.log(click);
-
             //if answer is already on display and btn on number pad is pressed, begin new calculation 
             if (hasAnswer) {
                 x.num1.textContent = "";
@@ -64,11 +58,12 @@ const FedtCalculator = {
         }
 
         const handleOperand = e => {            
-            if (click > 0) {
+            if (x.num1.textContent !== '') {
                 //toggles operand bool to indicate 1st number cannot be altered 
                 isSecondOperand = true;
                 //resets answer to allow for new calculation
                 hasAnswer = false;
+                x.decimal.disabled = false;
                 x.operand.textContent = e.target.textContent;
             }
         }
@@ -105,7 +100,19 @@ const FedtCalculator = {
         }
         
         //event listeners on buttons
-        x.numberPad.addEventListener('click', handleNumberpad);
+        x.numberPad.addEventListener('click', e => {
+            handleNumberpad(e)
+
+            if (x.num1.textContent.includes('.') && !isSecondOperand) {
+                if (x.num1.textContent.match(/./g).length > 0) {
+                    x.decimal.disabled = true;
+                }
+            } else if (x.num2.textContent.includes('.')) {
+                if (x.num2.textContent.match(/./g).length > 0) {
+                    x.decimal.disabled = true;
+                }
+            }
+        });
         
         x.operandPad.addEventListener('click', handleOperand);
 
