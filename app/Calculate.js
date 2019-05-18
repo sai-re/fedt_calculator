@@ -24,6 +24,7 @@ const Calculator = {
 
         let answer = 0;
 
+        //GENERAL FUNCTIONS
         //calculation functions
         const multiply = (num1, num2) => Number(num1) * Number(num2);
         const subtract = (num1, num2) => Number(num1) - Number(num2);
@@ -48,6 +49,7 @@ const Calculator = {
             }
         }
 
+        //HANDLER FUNCTIONS
         const handleNumberpad = e => {
             //if answer is already on display and btn on number pad is pressed, begin new calculation
             if (hasAnswer) {
