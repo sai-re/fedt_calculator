@@ -18,9 +18,10 @@ const Calculator = {
     },
 
     calculator: function() {
-        //booleons to check status
+        //booleons to check status of clicks
         let isSecondOperand = false;
         let hasAnswer = false;
+
         let answer = 0;
 
         //calculation functions
@@ -35,32 +36,43 @@ const Calculator = {
             x.num2.textContent = "";
             x.operand.textContent = "";
             x.answer.textContent = "";
-            isDisabled = false;
             isSecondOperand = false;
             x.decimal.disabled = false;
+            answer = 0;
+        }
+
+        //disables decimals
+        const disableDecimal = (btn) => {
+            if (btn.target.textContent === '.') {
+                x.decimal.disabled = true;
+            }
         }
 
         const handleNumberpad = e => {
-            //if answer is already on display and btn on number pad is pressed, begin new calculation 
+            //if answer is already on display and btn on number pad is pressed, begin new calculation
             if (hasAnswer) {
                 x.num1.textContent = "";
                 hasAnswer = false;
             }
             
-            // if an operand has been clicked, enter number as 2nd number else 1st
+            // if an operand has been clicked, enter number as 2nd number else 1st, also disable decimal if more than one
             if (isSecondOperand) {
                 x.num2.textContent += e.target.textContent;
+                disableDecimal(e);
             } else {
                 x.num1.textContent += e.target.textContent;
+                disableDecimal(e);
             }
         }
 
-        const handleOperand = e => {            
+        const handleOperand = e => {
+            //prevent operand being pressed as first click
             if (x.num1.textContent !== '') {
-                //toggles operand bool to indicate 1st number cannot be altered 
+                //toggles operand bool to indicate 1st number cannot be altered
                 isSecondOperand = true;
-                //resets answer to allow for new calculation
+                //resets answer to allow for new calculation otherwise new 1st value will not remain on display
                 hasAnswer = false;
+                //enable decimal for second value
                 x.decimal.disabled = false;
                 x.operand.textContent = e.target.textContent;
             }
@@ -89,37 +101,22 @@ const Calculator = {
             }
             
             //prints final answer to display and add to 1st number for additional calculations
-            x.answer.textContent = answer.toLocaleString();
-            x.num1.textContent = answer;
+            x.answer.textContent = Math.round(answer);
+            x.num1.textContent = Math.round(answer);
             
-            //clears 2nd number and operand for new calculations 
+            //clears 2nd number and operand for new calculations
             x.num2.textContent = "";
             x.operand.textContent = "";
         }
         
         //event listeners on buttons
-        x.numberPad.addEventListener('click', e => {
-            handleNumberpad(e)
-
-            if (x.num1.textContent.includes('.') && !isSecondOperand) {
-                if (x.num1.textContent.match(/./g).length > 0) {
-                    x.decimal.disabled = true;
-                }
-            } else if (x.num2.textContent.includes('.')) {
-                if (x.num2.textContent.match(/./g).length > 0) {
-                    x.decimal.disabled = true;
-                }
-            }
-        });
+        x.numberPad.addEventListener('click', handleNumberpad);
         
         x.operandPad.addEventListener('click', handleOperand);
 
         x.equals.addEventListener('click', handleEquals);
 
-        //runs reset functions and clears all data
-        x.reset.addEventListener('click', () => {
-            reset();
-        });
+        x.reset.addEventListener('click', reset);
     }
 }
 
