@@ -49,6 +49,10 @@ const Calculator = {
             }
         }
 
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        }
+
         //HANDLER FUNCTIONS
         const handleNumberpad = e => {
             //if answer is already on display and btn on number pad is pressed, begin new calculation
@@ -103,8 +107,8 @@ const Calculator = {
             }
             
             //prints final answer to display and add to 1st number for additional calculations
-            x.answer.textContent = Math.round(answer);
-            x.num1.textContent = Math.round(answer);
+            x.answer.textContent = formatNumber(answer.toFixed(1));
+            x.num1.textContent = formatNumber(answer.toFixed(1));
             
             //clears 2nd number and operand for new calculations
             x.num2.textContent = "";
