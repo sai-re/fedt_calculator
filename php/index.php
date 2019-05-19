@@ -1,5 +1,5 @@
 <?php
-    require_once 'Calculation.php'
+    require_once 'Calculations.php'
 ?>
 
 <!DOCTYPE html>
