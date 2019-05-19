@@ -6,10 +6,11 @@ const Calculator = {
         operand: document.getElementById("operand-js"),
         numberPad: document.getElementById("number-pad-js"),
         operandPad: document.getElementById("operand-pad-js"),
+        equalText: document.getElementById("equals-js"),
         answer: document.getElementById("answer-js"),
         equals: document.getElementById("submit-js"),
         reset: document.getElementById("ac-js"),
-        decimal: document.getElementById("decimal-js"),
+        decimal: document.getElementById("decimal-js")
     },
 
     init: function() {
@@ -37,6 +38,7 @@ const Calculator = {
             x.num2.textContent = "";
             x.operand.textContent = "";
             x.answer.textContent = "";
+            x.equalText.textContent = "";
             isSecondOperand = false;
             x.decimal.disabled = false;
             answer = 0;
@@ -44,13 +46,7 @@ const Calculator = {
 
         //disables decimals
         const disableDecimal = (btn) => {
-            if (btn.target.textContent === '.') {
-                x.decimal.disabled = true;
-            }
-        }
-
-        function formatNumber(num) {
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+            if (btn.target.textContent === '.') x.decimal.disabled = true;
         }
 
         //HANDLER FUNCTIONS
@@ -58,10 +54,13 @@ const Calculator = {
             //if answer is already on display and btn on number pad is pressed, begin new calculation
             if (hasAnswer) {
                 x.num1.textContent = "";
+                x.num2.textContent = "";
+                x.operand.textContent = "";
+                x.equalText.textContent = "";
                 hasAnswer = false;
             }
             
-            // if an operand has been clicked, enter number as 2nd number else 1st, also disable decimal if more than one
+            // if an operand has been clicked, enter number as 2nd value else 1st, also disable decimal if more than one
             if (isSecondOperand) {
                 x.num2.textContent += e.target.textContent;
                 disableDecimal(e);
@@ -72,9 +71,17 @@ const Calculator = {
         }
 
         const handleOperand = e => {
-            //prevent operand being pressed as first click
+            //if answer on display, and operand is pressed make answer 1st value for new calculation
+            if (hasAnswer) {
+                x.num1.textContent = x.answer.textContent;
+                //clears 2nd value and operand for new calculation
+                x.num2.textContent = "";
+                x.equalText.textContent = "";
+            }
+
+            //prevents operand being pressed until 1st value entered
             if (x.num1.textContent !== '') {
-                //toggles operand bool to indicate 1st number cannot be altered
+                //toggles operand bool so next value entered will be used as 2nd value in calculation
                 isSecondOperand = true;
                 //resets answer to allow for new calculation otherwise new 1st value will not remain on display
                 hasAnswer = false;
@@ -85,34 +92,25 @@ const Calculator = {
         }
 
         const handleEquals = () => {
-            hasAnswer = true;
-            isSecondOperand = false;
-            x.decimal.disabled = false;
-            
-            // if statements to determine which calculation to use
-            if (x.operand.textContent === 'x') {
-                answer = multiply(x.num1.textContent, x.num2.textContent);         
+            //doesn't run unless operand is on display
+            if (x.operand.textContent !== "") {
+                hasAnswer = true;
+                isSecondOperand = false;
+                x.decimal.disabled = false;
+                x.equalText.textContent = "=";
+                
+                // if statements to determine which calculation to use
+                if (x.operand.textContent === 'x') answer = multiply(x.num1.textContent, x.num2.textContent);
+                
+                if (x.operand.textContent === '+') answer = add(x.num1.textContent, x.num2.textContent);
+        
+                if (x.operand.textContent === '-') answer = subtract(x.num1.textContent, x.num2.textContent);
+        
+                if (x.operand.textContent === '/') answer = divide(x.num1.textContent, x.num2.textContent);
+                
+                //prints final answer to display
+                x.answer.textContent = answer.toFixed(1);
             }
-            
-            if (x.operand.textContent === '+') {
-                answer = add(x.num1.textContent, x.num2.textContent);         
-            }
-    
-            if (x.operand.textContent === '-') {
-                answer = subtract(x.num1.textContent, x.num2.textContent);         
-            }
-    
-            if (x.operand.textContent === '/') {
-                answer = divide(x.num1.textContent, x.num2.textContent);         
-            }
-            
-            //prints final answer to display and add to 1st number for additional calculations
-            x.answer.textContent = formatNumber(answer.toFixed(1));
-            x.num1.textContent = formatNumber(answer.toFixed(1));
-            
-            //clears 2nd number and operand for new calculations
-            x.num2.textContent = "";
-            x.operand.textContent = "";
         }
         
         //event listeners on buttons
