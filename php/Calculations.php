@@ -8,6 +8,15 @@
         //variable for header row
         $row = 1;
 
+        //function to check if row is head or cell
+        function insertTags($row, $head, $cells) {
+            if ($row == 1) {
+                echo $head;
+            } else {
+                echo $cells;
+            }
+        };
+
         //check if open is true
         if (($file = fopen("data.csv", "r")) !== FALSE) {
             //create table body
@@ -17,28 +26,22 @@
             while (($data = fgetcsv($file)) !== FALSE) {
 
                 //for first set of value create head tags
-                if ($row == 1) {
-                    echo '<thead><tr>';
-                } else {
-                    echo '<tr>';
-                }
+                $headRow = '<thead><tr>';
+                $cellsRow = '<tr>';
+                insertTags($row, $headRow, $cellsRow);
 
                 //loop through each value in array
                 foreach ($data as $cell) {
                     //for row one add first 4 values to header cells
-                    if ($row == 1) {
-                        echo '<th class="csvTable__head">'.$cell.'</th>';
-                    } else{
-                        echo '<td class="csvTable__cell">'.$cell.'</td>';
-                    }
+                    $headCell = '<th class="csvTable__head">'.$cell.'</th>';
+                    $cell = '<td class="csvTable__cell">'.$cell.'</td>';
+                    insertTags($row, $headCell, $cell);
                 }
 
                 //closing tags for header open body tag for next iteration
-                if ($row == 1) {
-                    echo '</tr></thead><tbody>';
-                } else{
-                    echo '</tr>';
-                }
+                $headClose = '</tr></thead><tbody>';
+                $cellsClose = '</tr>';
+                insertTags($row, $headClose, $cellsClose);
 
                 //increment row for next iteration
                 $row++;
@@ -46,7 +49,7 @@
 
             echo '</tbody></table>';
         }
-        
+
         //close open file
         fclose($file);
     }
