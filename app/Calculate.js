@@ -93,7 +93,7 @@ const Calculator = {
 
         const handleEquals = () => {
             //doesn't run unless operand is on display
-            if (x.operand.textContent !== "") {
+            if (x.operand.textContent !== "" && x.num2.textContent !== "") {
                 hasAnswer = true;
                 isSecondOperand = false;
                 x.decimal.disabled = false;
